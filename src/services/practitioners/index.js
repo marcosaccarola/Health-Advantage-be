@@ -8,7 +8,7 @@ practitionerRouter.post('/login',async(req,res,next)=>{
         const{email,password}=req.body
         const user=await PractitionerModel.checkCredentials(email,password)
         if(user){
-            res.send({user})
+            res.send(user)
         }else{
             res.send('User not found.')
         }
