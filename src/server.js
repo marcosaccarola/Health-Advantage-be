@@ -3,6 +3,7 @@ import listEndpoints from 'express-list-endpoints'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import practitionerRouter from './services/practitioners'
+import patientRouter from './services/patients'
 
 const server=express()
 const PORT=process.env.PORT||3001
@@ -12,7 +13,8 @@ server.use(cors())
 server.use(express.json())
 
 // *____________________________________ ROUTES
-server.use('practitioner',practitionerRouter)
+server.use('/practitioner',practitionerRouter)
+server.use('/patient',patientRouter)
 
 // *____________________________________ ERROR HANDLERS
 
