@@ -4,6 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import practitionerRouter from './services/practitioners'
 import patientRouter from './services/patients'
+import interventionRouter from './services/interventions'
 
 const server=express()
 const PORT=process.env.PORT||3001
@@ -15,6 +16,7 @@ server.use(express.json())
 // *____________________________________ ROUTES
 server.use('/practitioner',practitionerRouter)
 server.use('/patient',patientRouter)
+server.use('/intervention',interventionRouter)
 
 // *____________________________________ ERROR HANDLERS
 
