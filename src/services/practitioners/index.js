@@ -10,7 +10,7 @@ practitionerRouter.post('/login',async(req,res,next)=>{
         if(user){
             res.send(user)
         }else{
-            res.send('User not found.')
+            res.status(404).send('User not found.')
         }
     } catch (error) {
         next(error)
