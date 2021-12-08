@@ -39,7 +39,6 @@ practitionerSchema.methods.toJSON=function(){
 
 practitionerSchema.statics.checkCredentials=async function(email,plainPW){
     const practitioner=await this.findOne({email})
-    console.log('CHECK CREDENTIALS USER BY EMAIL', practitioner,email,plainPW)
     if(practitioner){
         const isMatch=await bcrypt.compare(plainPW,practitioner.password)
         if(isMatch) return practitioner

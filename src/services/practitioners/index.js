@@ -6,7 +6,6 @@ const practitionerRouter=express.Router()
 practitionerRouter.post('/login',async(req,res,next)=>{
     try {
         const{email,password}=req.body
-        console.log('REQ.BODY',req.body,email,password)
         const user=await PractitionerModel.checkCredentials(email,password)
         if(user){
             res.send({user})
