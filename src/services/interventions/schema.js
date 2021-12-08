@@ -8,7 +8,7 @@ const interventionSchema=new Schema(
         zipcode:{type:Number,required:true},
         interventionRequested:{type:String,required:true},
         moreInfo:{type:String,required:true},
-        answers:[Object]
+        answers:{type:Array,default:[]}
     },{timestamps:true}
 )
 

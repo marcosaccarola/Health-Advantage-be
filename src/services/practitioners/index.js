@@ -16,7 +16,7 @@ practitionerRouter.get('/:id',async(req,res,next)=>{
     try {
         const practitioner=await PractitionerModel.findById(req.params.id)
         if(practitioner){
-            res.send(practitioners)
+            res.send(practitioner)
         }else{
             res.status(404).send('Practitioner not found.')
         }

@@ -11,7 +11,8 @@ const patientSchema=new Schema(
         firstName:{type:String},
         lastName:{type:String},
         bio:{type:String},
-        photo:{type:String}
+        photo:{type:String},
+        published:{type:Array,default:[]}
     },{timestamps:true}
 )
 
