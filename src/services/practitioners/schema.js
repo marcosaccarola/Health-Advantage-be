@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose from 'mongoose'
 
-const{Shema,model}=mongoose
+const{Schema,model}=mongoose
 
 const practitionerSchema=new Schema(
     {
@@ -18,25 +18,7 @@ const practitionerSchema=new Schema(
         photo:{type:String},
         specializations:{type:String},
         InterventionsTakenInCharge:{type:Array,default:[]}
-    },
-    {timestamps:true}
+    },{timestamps:true}
 )
 
 export default model('practitioner',practitionerSchema)
-
-// "userId":"ottavionzdlfisgu",
-
-// "zipcode":30125,
-// "type":"practitioner",
-// "firstName":"Ottavio",
-// "lastName":"Ottaviani",
-// "age":42,
-// "profession":"doctor",
-// "educationalQualification":"Studente Scienze Infermieristiche",
-// "medicalBoard":"Ordine dei Medici di Trento n.2987415",
-// "bio":"bio text example (ottavio)",
-// "photo":"",
-// "specializations":"specializations text example (ottavio)",
-// "InterventionsTakenInCharge":[],
-// "addedAt":"2021-02-02T06:12:26.668Z",
-// "updatedAt":"2021-02-02T06:12:48.930Z"
