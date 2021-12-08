@@ -14,7 +14,7 @@ patientRouter.post('/',async(req,res,next)=>{
 })
 patientRouter.get('/:id',async(req,res,next)=>{
     try {
-        const patient=PatientModel.findById(req.params.id)
+        const patient=await PatientModel.findById(req.params.id)
         if(patient){
             res.send(patient)
         }else{

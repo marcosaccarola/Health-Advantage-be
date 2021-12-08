@@ -1,5 +1,5 @@
 import express from 'express'
-import InterventionModel from './schema'
+import InterventionModel from './schema.js'
 
 const interventionRouter=express.Router()
 

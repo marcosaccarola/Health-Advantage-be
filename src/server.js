@@ -2,9 +2,9 @@ import express from 'express'
 import listEndpoints from 'express-list-endpoints'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import practitionerRouter from './services/practitioners'
-import patientRouter from './services/patients'
-import interventionRouter from './services/interventions'
+import practitionerRouter from './services/practitioners/index.js'
+import patientRouter from './services/patients/index.js'
+import interventionRouter from './services/interventions/index.js'
 
 const server=express()
 const PORT=process.env.PORT||3001
