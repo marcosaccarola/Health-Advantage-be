@@ -36,7 +36,6 @@ practitionerSchema.methods.toJSON=function(){
     delete practitionerObject.__v
     return practitionerObject
 }
-
 practitionerSchema.statics.checkCredentials=async function(email,plainPW){
     const practitioner=await this.findOne({email})
     if(practitioner){
