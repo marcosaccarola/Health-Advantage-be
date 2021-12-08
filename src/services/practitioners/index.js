@@ -3,6 +3,19 @@ import PractitionerModel from './schema.js'
 
 const practitionerRouter=express.Router()
 
+practitionerRouter.post('/login',async(req,res,next)=>{
+    try {
+        const{email,password}=req.body
+        const user=await PractitionerModel.checkCredentials()
+        if(user){
+            res.send({user})
+        }else{
+            res.send('User not found.')
+        }
+    } catch (error) {
+        next(error)
+    }
+})
 practitionerRouter.post('/',async(req,res,next)=>{
     try {
         const newPractitioner=new PractitionerModel(req.body)

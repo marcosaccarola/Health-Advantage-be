@@ -20,5 +20,13 @@ const practitionerSchema=new Schema(
         InterventionsTakenInCharge:{type:Array,default:[]}
     },{timestamps:true}
 )
+practitionerSchema.statics.checkCredentials=async function(email,plainPw){
+    const practitioner=await this.findOne({email})
+    if(practitioner){
+        const isMatch=await bcrypt.compare(plainPw,practitioner.password)
+        if(isMatch) return practitioner
+        else return null
+    }else return null
+}
 
 export default model('practitioner',practitionerSchema)
