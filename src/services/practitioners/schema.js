@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const{Schema,model}=mongoose
 
@@ -20,10 +21,27 @@ const practitionerSchema=new Schema(
         InterventionsTakenInCharge:{type:Array,default:[]}
     },{timestamps:true}
 )
-practitionerSchema.statics.checkCredentials=async function(email,plainPw){
+practitionerSchema.pre('save',async function(next){
+    const newPractitioner=this
+    const plainPW=newPractitioner.password
+    if(newPractitioner.isModified('password')){
+        newPractitioner.password=await bcrypt.hash(plainPW,10)
+    }
+    next()
+})
+practitionerSchema.methods.toJSON=function(){
+    const practitionerDocument=this
+    const practitionerObject=practitionerDocument.toObject()
+    delete practitionerObject.password
+    delete practitionerObject.__v
+    return practitionerObject
+}
+
+practitionerSchema.statics.checkCredentials=async function(email,plainPW){
     const practitioner=await this.findOne({email})
+    console.log('CHECK CREDENTIALS USER BY EMAIL', practitioner,email,plainPW)
     if(practitioner){
-        const isMatch=await bcrypt.compare(plainPw,practitioner.password)
+        const isMatch=await bcrypt.compare(plainPW,practitioner.password)
         if(isMatch) return practitioner
         else return null
     }else return null
