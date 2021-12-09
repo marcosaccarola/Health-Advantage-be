@@ -13,6 +13,7 @@ const patientSchema=new Schema(
         lastName:{type:String},
         bio:{type:String},
         photo:{type:String},
+        // published:[{type:Schema.Types.ObjectId,ref:"intervention"}]
         published:{type:Array,default:[]}
     },{timestamps:true}
 )

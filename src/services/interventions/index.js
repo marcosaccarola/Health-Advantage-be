@@ -8,8 +8,13 @@ interventionRouter.post('/',async(req,res,next)=>{
     try {
         const intervention=new InterventionModel(req.body)
         const{_id}=await intervention.save()
-        const user=await PatientModel.findById(req.body.userId)
-        res.status(201).send(user)
+        const updatedUser=await PatientModel.findByIdAndUpdate(
+            req.body.userId,
+            {$push:{published:_id}},
+            {new:true}
+            )
+        console.log('FROM INTERVENTION ROUTER',updatedUser)
+        res.status(201).send(updatedUser)
     } catch (error) {
         next(error)
     }

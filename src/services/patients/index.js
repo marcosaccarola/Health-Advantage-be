@@ -1,5 +1,6 @@
 import express from 'express'
 import PatientModel from './schema.js'
+import InterventionModel from '../interventions/schema.js'
 
 const patientRouter=express.Router()
 
@@ -16,6 +17,18 @@ patientRouter.post('/login',async(req,res,next)=>{
         next(error)
     }
 })
+// patientRouter.post('/intervention',async(req,res,next)=>{
+//     try {
+//         const updatedUser=await PatientModel.findByIdAndUpdate(
+//             req.body.userId,
+//             {$push:{published:req.body}},
+//             {new:true}
+//         )
+//         res.send(updatedUser)
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 patientRouter.post('/',async(req,res,next)=>{
     try {
         const patient=new PatientModel(req.body)
