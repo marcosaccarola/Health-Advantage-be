@@ -19,8 +19,8 @@ const patientSchema=new Schema(
 patientSchema.pre('save',async function(next){
     const newPatient=this
     const plainPW=newPatient.password
-    if(newPatient.isModified(password)){
-        newPatient=await bcrypt.hash(plainPW,10)
+    if(newPatient.isModified('password')){
+        newPatient.password=await bcrypt.hash(plainPW,10)
     }
     next()
 })

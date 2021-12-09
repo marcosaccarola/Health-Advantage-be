@@ -3,6 +3,19 @@ import PatientModel from './schema.js'
 
 const patientRouter=express.Router()
 
+patientRouter.post('/login',async(req,res,next)=>{
+    try {
+        const{email,password}=req.body
+        const user=await PatientModel.checkCredentials(email,password)
+        if(user){
+            res.send(user)
+        }else{
+            res.status(404).send('User not found.')
+        }
+    } catch (error) {
+        next(error)
+    }
+})
 patientRouter.post('/',async(req,res,next)=>{
     try {
         const patient=new PatientModel(req.body)
