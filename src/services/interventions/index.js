@@ -1,5 +1,6 @@
 import express from 'express'
 import InterventionModel from './schema.js'
+import PatientModel from '../patients/schema.js'
 
 const interventionRouter=express.Router()
 
@@ -7,7 +8,8 @@ interventionRouter.post('/',async(req,res,next)=>{
     try {
         const intervention=new InterventionModel(req.body)
         const{_id}=await intervention.save()
-        res.status(201).send({_id})
+        const user=await PatientModel.findById(req.body.userId)
+        res.status(201).send(user)
     } catch (error) {
         next(error)
     }
