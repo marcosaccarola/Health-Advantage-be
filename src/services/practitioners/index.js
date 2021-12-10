@@ -39,11 +39,15 @@ practitionerRouter.put('/:userId/addIntervention/:interventionId',async(req,res,
 })
 practitionerRouter.delete('/:userId/removeIntervention/:interventionId',async(req,res,next)=>{
     try {
+        const idToRemove=req.params.interventionId.toString()
+        console.log('PARAMS.ID TO REMOVE',req.params.interventionId)
+        console.log('ID TO REMOVE',idToRemove)
         const updatedPractitioner=await PractitionerModel.findByIdAndUpdate(
             req.params.userId,
-            {$pull:{InterventionsTakenInCharge:{_id:req.params.interventionId}}},
+            {$pull:{InterventionsTakenInCharge:{_id:'61b28982ae791b1d6cc63669'}}},
             {new:true}
-        ).populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
+        )
+        .populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
         res.status(201).send(updatedPractitioner)
     } catch (error) {
         next(error)
