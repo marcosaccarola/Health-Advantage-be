@@ -13,7 +13,6 @@ interventionRouter.post('/',async(req,res,next)=>{
             {$push:{published:_id}},
             {new:true}
             ).populate({path:'published',select:'zipcode interventionRequested moreInfo answers'})
-        // const user=await PatientModel.findById(req.body.userId)
         res.status(201).send(updatedUser)
     } catch (error) {
         next(error)

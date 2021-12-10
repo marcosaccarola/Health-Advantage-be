@@ -14,7 +14,6 @@ const patientSchema=new Schema(
         bio:{type:String},
         photo:{type:String},
         published:[{type:Schema.Types.ObjectId,ref:'intervention'}]
-        // published:{type:Array,default:[]}
     },{timestamps:true}
 )
 patientSchema.pre('save',async function(next){
@@ -33,7 +32,7 @@ patientSchema.methods.toJSON=function(){
     return patientObj
 }
 patientSchema.statics.checkCredentials=async function(email,plainPW){
-    const patient=await this.findOne({email})
+    const patient=await this.findOne({email}).populate({path:'published',select:'zipcode interventionRequested moreInfo answers'})
     if(patient){
         const isMatch=await bcrypt.compare(plainPW,patient.password)
         if(isMatch) return patient
