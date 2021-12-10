@@ -3,6 +3,15 @@ import PractitionerModel from './schema.js'
 
 const practitionerRouter=express.Router()
 
+practitionerRouter.post('/',async(req,res,next)=>{
+    try {
+        const newPractitioner=new PractitionerModel(req.body)
+        const{_id}=await newPractitioner.save()
+        res.status(201).send({_id})
+    } catch (error) {
+        next(error)
+    }
+})
 practitionerRouter.post('/login',async(req,res,next)=>{
     try {
         const{email,password}=req.body
@@ -16,11 +25,14 @@ practitionerRouter.post('/login',async(req,res,next)=>{
         next(error)
     }
 })
-practitionerRouter.post('/',async(req,res,next)=>{
+practitionerRouter.put('/:userId/addIntervention/:interventionId',async(req,res,next)=>{
     try {
-        const newPractitioner=new PractitionerModel(req.body)
-        const{_id}=await newPractitioner.save()
-        res.status(201).send({_id})
+        const updatedPractitioner=await PractitionerModel.findByIdAndUpdate(
+            req.params.userId,
+            {$push:{InterventionsTakenInCharge:req.params.interventionId}},
+            {new:true}
+        ).populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
+        res.status(201).send(updatedPractitioner)
     } catch (error) {
         next(error)
     }
