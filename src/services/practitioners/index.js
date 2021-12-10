@@ -37,6 +37,18 @@ practitionerRouter.put('/:userId/addIntervention/:interventionId',async(req,res,
         next(error)
     }
 })
+practitionerRouter.delete('/:userId/removeIntervention/:interventionId',async(req,res,next)=>{
+    try {
+        const updatedPractitioner=await PractitionerModel.findByIdAndUpdate(
+            req.params.userId,
+            {$pull:{InterventionsTakenInCharge:{_id:req.params.interventionId}}},
+            {new:true}
+        ).populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
+        res.status(201).send(updatedPractitioner)
+    } catch (error) {
+        next(error)
+    }
+})
 practitionerRouter.get('/:id',async(req,res,next)=>{
     try {
         const practitioner=await PractitionerModel.findById(req.params.id)
