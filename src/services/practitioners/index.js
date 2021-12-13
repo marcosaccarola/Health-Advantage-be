@@ -45,6 +45,7 @@ practitionerRouter.delete('/:userId/removeIntervention/:interventionId',async(re
         const updatedPractitioner=await PractitionerModel.findByIdAndUpdate(
             req.params.userId,
             {$pull:{InterventionsTakenInCharge:{_id:'61b28982ae791b1d6cc63669'}}},
+            
             {new:true}
         )
         .populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
