@@ -10,7 +10,10 @@ const server=express()
 const PORT=process.env.PORT||3001
 
 // *____________________________________ MIDDLEWARES
-server.use(cors({origin:process.env.FE_PROD_URL}))
+const corsOptions = {
+    origin:process.env.FE_PROD_URL||process.env.FE_DEV_URL
+  }
+server.use(cors(corsOptions))
 server.use(express.json())
 
 // *____________________________________ ROUTES
