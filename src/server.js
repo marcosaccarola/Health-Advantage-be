@@ -10,19 +10,7 @@ const server=express()
 const PORT=process.env.PORT||3001
 
 // *____________________________________ MIDDLEWARES
-const whitelist=[process.env.FE_DEV_URL,process.env.FE_PROD_URL]
-const corsOpts={
-	origin:function (origin,next){
-		console.log('CURRENT ORIGIN: ',origin);
-		if(!origin||whitelist.indexOf(origin)!==-1){
-			next(null,true);
-		}else{
-			next(new Error(`Origin ${origin} not allowed!`));
-		}
-	},
-};
-
-server.use(cors(corsOpts))
+server.use(cors({origin:process.env.FE_PROD_URL}))
 server.use(express.json())
 
 // *____________________________________ ROUTES
