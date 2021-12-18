@@ -11,9 +11,9 @@ const PORT=process.env.PORT||3001
 
 // *____________________________________ MIDDLEWARES
 const corsOptions = {
-    origin:[process.env.FE_PROD_URL,process.env.FE_DEV_URL]
+    origin:process.env.FE_PROD_URL||process.env.FE_DEV_URL
   }
-server.use(cors(corsOptions))
+server.use(cors())
 server.use(express.json())
 
 // *____________________________________ ROUTES
