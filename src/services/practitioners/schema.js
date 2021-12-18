@@ -38,7 +38,7 @@ practitionerSchema.methods.toJSON=function(){
     return practitionerObject
 }
 practitionerSchema.statics.checkCredentials=async function(email,plainPW){
-    const practitioner=await this.findOne({email}).populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
+    const practitioner=await this.findOne({email}).populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers updatedAt'})
     if(practitioner){
         const isMatch=await bcrypt.compare(plainPW,practitioner.password)
         if(isMatch) return practitioner
