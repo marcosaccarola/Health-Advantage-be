@@ -48,7 +48,7 @@ practitionerRouter.delete('/:userId/removeIntervention/:interventionId',async(re
             
             {new:true}
         )
-        .populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers'})
+        .populate({path:'InterventionsTakenInCharge',select:'zipcode interventionRequested moreInfo answers updatedAt'})
         res.status(201).send(updatedPractitioner)
     } catch (error) {
         next(error)
