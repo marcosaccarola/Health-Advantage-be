@@ -33,7 +33,7 @@ patientRouter.post('/',async(req,res,next)=>{
     try {
         const patient=new PatientModel(req.body)
         const{_id}=await patient.save()
-        res.status(201).send({_id})
+        res.status(201).send(patient)
     } catch (error) {
         next(error)
     }
