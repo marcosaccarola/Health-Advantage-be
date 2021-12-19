@@ -66,5 +66,17 @@ practitionerRouter.get('/:id',async(req,res,next)=>{
         next(error)
     }
 })
+practitionerRouter.get('/',async(req,res,next)=>{
+    try{
+        const practitioners=await PractitionerModel.find()
+        if(practitioners){
+            res.send(practitioners)
+        }else{
+            res.status(404).send('Practitioners not found.')
+        }
+    }catch(error){
+        next(error)
+    }
+})
 
 export default practitionerRouter
