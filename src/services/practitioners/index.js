@@ -7,7 +7,7 @@ practitionerRouter.post('/',async(req,res,next)=>{
     try {
         const newPractitioner=new PractitionerModel(req.body)
         const{_id}=await newPractitioner.save()
-        res.status(201).send({_id})
+        res.status(201).send(newPractitioner)
     } catch (error) {
         next(error)
     }
