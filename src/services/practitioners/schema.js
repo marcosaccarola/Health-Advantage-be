@@ -18,7 +18,6 @@ const practitionerSchema=new Schema(
         bio:{type:String},
         photo:{type:String},
         specializations:{type:String},
-        // InterventionsTakenInCharge:{type:Array,default:[]}
         InterventionsTakenInCharge:[{type:Schema.Types.ObjectId,ref:'intervention'}]
     },{timestamps:true}
 )
